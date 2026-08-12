@@ -1,0 +1,63 @@
+# =========================
+# Java
+# =========================
+# Arquivos compilados
+*.class
+
+# Logs
+*.log
+
+# Arquivos empacotados
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Logs de crash da JVM
+hs_err_pid*
+replay_pid*
+
+# =========================
+# IntelliJ IDEA
+# =========================
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# =========================
+# Linux
+# =========================
+# Arquivos temporários e de backup gerados por editores no Linux
+*~
+*.swp
+*.swo
+
+# Configurações de diretório do gerenciador de arquivos (KDE/Gnome)
+.directory
+
+# =========================
+# Build Tools (Opcional, mas recomendado)
+# =========================
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/

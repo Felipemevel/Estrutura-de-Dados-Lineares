@@ -3,7 +3,7 @@ package Pilhas;
 public class Main {
     public static void main(String[] args) {
         System.out.println("--- Testando Pilha de Strings ---");
-        PilhaArray<String> pilhaStr = new PilhaArray<>(3);
+        PilhaArray pilhaStr = new PilhaArray(3);
 
         System.out.println("Está vazia? " + pilhaStr.isEmpty());
         pilhaStr.push("Java");
@@ -18,7 +18,7 @@ public class Main {
         System.out.println("Tamanho após pop: " + pilhaStr.size());
 
         System.out.println("\n--- Testando Pilha de Integers ---");
-        PilhaArray<Integer> pilhaInt = new PilhaArray<>(2);
+        PilhaArray pilhaInt = new PilhaArray(2);
 
         pilhaInt.push(10);
         pilhaInt.push(20);
