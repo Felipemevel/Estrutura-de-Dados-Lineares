@@ -47,5 +47,33 @@ public class Main {
 
         System.out.println("\nTentando remover de fila vazia:");
         filaCircular.dequeue(); // Deve acusar vazia
+
+        System.out.println("--- Testando Fila Ligada Simples ---");
+
+        // Iniciando com o construtor vazio
+        FilaLigadaSimples filaLigada = new FilaLigadaSimples();
+
+        System.out.println("A fila ligada está vazia? " + filaLigada.isEmpty());
+
+        System.out.println("\nInserindo elementos base...");
+        // O código vai quebrar nesta primeira inserção!
+        filaLigada.queue("MIPS");
+        filaLigada.queue("Assembly");
+        filaLigada.queue("Python");
+
+        System.out.println("Tamanho da fila ligada: " + filaLigada.size());
+        System.out.println("Frente atual: " + filaLigada.front());
+
+        System.out.println("\n--- Testando Remoção (Dequeue) ---");
+        System.out.println("Removendo: " + filaLigada.dequeue());
+        System.out.println("Nova frente: " + filaLigada.front());
+        System.out.println("Tamanho após o dequeue: " + filaLigada.size());
+
+        System.out.println("\n--- Esvaziando a Fila Ligada ---");
+        while (!filaLigada.isEmpty()) {
+            System.out.println("Removendo o nó contendo: " + filaLigada.dequeue());
+        }
+
+        System.out.println("Tamanho final: " + filaLigada.size());
     }
 }
