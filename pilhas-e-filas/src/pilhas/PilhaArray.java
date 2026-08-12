@@ -1,4 +1,4 @@
-package Pilhas;
+package pilhas;
 
 public class PilhaArray implements PilhaInterface{
     private int capacity;

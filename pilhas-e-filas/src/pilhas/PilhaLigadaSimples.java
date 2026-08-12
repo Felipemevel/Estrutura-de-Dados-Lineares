@@ -1,4 +1,4 @@
-package Pilhas;
+package pilhas;
 
 public class PilhaLigadaSimples implements PilhaInterface{
     private static class Node{

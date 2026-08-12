@@ -1,4 +1,4 @@
-package Pilhas;
+package pilhas;
 
 public interface PilhaInterface {
     boolean isEmpty();
