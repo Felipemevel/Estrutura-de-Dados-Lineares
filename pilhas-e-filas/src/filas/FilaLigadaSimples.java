@@ -1,5 +1,7 @@
 package filas;
 
+import exceptions.FilaVaziaException;
+
 public class FilaLigadaSimples implements FilaInterface{
     public static class Node{
         Object element;
@@ -28,9 +30,8 @@ public class FilaLigadaSimples implements FilaInterface{
 
     @Override
     public Object dequeue(){
-        if (this.head == null){
-            System.out.println(">>> A fila já está vazia...");
-            return null;
+        if (isEmpty()){
+            throw new FilaVaziaException("Fila já está vazia.");
         }
         Node temp = this.head;
         this.head = this.head.next;
