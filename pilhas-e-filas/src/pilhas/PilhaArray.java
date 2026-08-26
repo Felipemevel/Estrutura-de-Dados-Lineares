@@ -1,5 +1,8 @@
 package pilhas;
 
+import exceptions.PilhaCheiaExcpetion;
+import exceptions.PilhaVaziaException;
+
 public class PilhaArray implements PilhaInterface{
     private int capacity;
     private static final int capacity_ = 1000;
@@ -24,8 +27,7 @@ public class PilhaArray implements PilhaInterface{
     @Override
     public void push(Object element){
         if (size() == capacity){
-            System.out.println(">>> A pilha já está cheia!");
-            return;
+            throw new PilhaCheiaExcpetion("Pilha está cheia!");
         }
         top++;
         array[top] = element;
@@ -33,8 +35,7 @@ public class PilhaArray implements PilhaInterface{
     @Override
     public Object pop(){
         if (isEmpty()){
-            System.out.println(">>> A pilha já está vazia...");
-            return null;
+            throw new PilhaVaziaException("Pilha já está vazia");
         }
         Object element = array[top];
         array[top] = null;
@@ -44,8 +45,7 @@ public class PilhaArray implements PilhaInterface{
     @Override
     public Object top(){
         if (isEmpty()){
-            System.out.println(">>> Não há itens na pilha");
-            return null;
+            throw new PilhaVaziaException("A pilha está vazia.");
         }
         return array[top];
     }

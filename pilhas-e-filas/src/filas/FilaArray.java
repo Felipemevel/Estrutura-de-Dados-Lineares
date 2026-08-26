@@ -1,5 +1,8 @@
 package filas;
 
+import exceptions.FilaCheiaException;
+import exceptions.FilaVaziaException;
+
 public class FilaArray implements FilaInterface{
     private int capacity;
     private final static int capacity_ = 1000;
@@ -19,8 +22,7 @@ public class FilaArray implements FilaInterface{
     @Override
     public Object dequeue(){
         if (size == 0){
-            System.out.println(">>> Fila já está vazia...");
-            return null;
+            throw new FilaVaziaException("Fila já está vazia.");
         }
         Object temp = array[front];
         array[front] = null;
@@ -31,8 +33,7 @@ public class FilaArray implements FilaInterface{
     @Override
     public void queue(Object element){
         if (this.size == capacity){
-            System.out.println(">>> Fila já está cheia!");
-            return;
+            throw new FilaCheiaException("Fila está cheia!");
         }
         rear = (rear + 1) % capacity;
         array[rear] = element;

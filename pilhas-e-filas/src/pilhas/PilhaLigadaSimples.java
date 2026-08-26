@@ -1,5 +1,7 @@
 package pilhas;
 
+import exceptions.PilhaVaziaException;
+
 public class PilhaLigadaSimples implements PilhaInterface{
     private static class Node{
         Object element;
@@ -39,9 +41,8 @@ public class PilhaLigadaSimples implements PilhaInterface{
     }
     @Override
     public Object pop(){
-        if(this.head == null){
-            System.out.println(">>> A pilha já está vazia...");
-            return null;
+        if(isEmpty()){
+            throw new PilhaVaziaException("Pilha já está vazia.");
         }
 
         Object poppedNode = this.head.element;
