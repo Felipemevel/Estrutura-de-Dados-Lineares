@@ -2,6 +2,7 @@ package vector;
 
 import vector.exceptions.IndiceInvalidoException;
 import vector.exceptions.VectorCheioException;
+import vector.exceptions.VectorVazioException;
 
 public class VectorCircular implements VectorInterface{
 
@@ -89,7 +90,7 @@ public class VectorCircular implements VectorInterface{
     public Object removeAtRank(int r){
 
         if (this.size == 0){
-            throw new VectorCheioException(">>> O vetor já está vazio.");
+            throw new VectorVazioException(">>> O vetor já está vazio.");
         } else if (r >= this.size || r < 0){
             throw new IndiceInvalidoException(">>> Índice inválido.");
         }

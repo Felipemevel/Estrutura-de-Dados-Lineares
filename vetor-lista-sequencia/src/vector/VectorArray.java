@@ -2,6 +2,7 @@ package vector;
 
 import vector.exceptions.IndiceInvalidoException;
 import vector.exceptions.VectorCheioException;
+import vector.exceptions.VectorVazioException;
 
 public class VectorArray implements VectorInterface {
 
@@ -71,7 +72,7 @@ public class VectorArray implements VectorInterface {
     @Override
     public Object removeAtRank(int r){
         if (size == 0){
-            throw new VectorCheioException(">>> O vetor já está vazio.");
+            throw new VectorVazioException(">>> O vetor já está vazio.");
         } else if (r > size){
             throw new IndiceInvalidoException(">>> Índice inválido.");
         }
