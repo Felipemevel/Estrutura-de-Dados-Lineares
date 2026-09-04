@@ -7,19 +7,19 @@ import vector.exceptions.VectorVazioException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+public class TesteVectorLigadaDupla {
 
     static List<String> falhas = new ArrayList<>();
     static int totalTestes = 0;
 
     public static void main(String[] args) {
-        teste("Construtor Vazio", Main::testeConstrutorVazio);
-        teste("Construtor com Elemento", Main::testeConstrutorComElemento);
-        teste("Inserção (insertAtRank)", Main::testeInsert);
-        teste("Acesso (elemAtRank)", Main::testeElemAtRank);
-        teste("Substituição (replaceAtRank)", Main::testeReplace);
-        teste("Remoção (removeAtRank)", Main::testeRemove);
-        teste("Exceções", Main::testeExcecoes);
+        teste("Construtor Vazio", TesteVectorLigadaDupla::testeConstrutorVazio);
+        teste("Construtor com Elemento", TesteVectorLigadaDupla::testeConstrutorComElemento);
+        teste("Inserção (insertAtRank)", TesteVectorLigadaDupla::testeInsert);
+        teste("Acesso (elemAtRank)", TesteVectorLigadaDupla::testeElemAtRank);
+        teste("Substituição (replaceAtRank)", TesteVectorLigadaDupla::testeReplace);
+        teste("Remoção (removeAtRank)", TesteVectorLigadaDupla::testeRemove);
+        teste("Exceções", TesteVectorLigadaDupla::testeExcecoes);
 
         resumoFinal();
     }
