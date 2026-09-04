@@ -1,3 +1,5 @@
+package vector.testes;
+
 import vector.VectorArray;
 import vector.exceptions.VectorCheioException;
 

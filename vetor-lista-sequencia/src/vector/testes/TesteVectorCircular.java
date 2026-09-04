@@ -1,3 +1,5 @@
+package vector.testes;
+
 import vector.VectorCircular;
 
 import vector.exceptions.IndiceInvalidoException;
