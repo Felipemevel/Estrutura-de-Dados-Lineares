@@ -19,7 +19,6 @@ public class VectorArray implements VectorInterface {
         this.array = new Object[capacity];
         this.size = 0;
     }
-    @Override
     public void resizeVector(int newCapacity){
          Object[] newArray = new Object[newCapacity];
 
@@ -30,7 +29,6 @@ public class VectorArray implements VectorInterface {
          this.capacity = newCapacity;
          this.array = newArray;
     }
-    @Override
     public void checkSize(){
         if (this.size == this.capacity) {
             resizeVector(capacity * 2);

@@ -26,7 +26,6 @@ public class VectorCircular implements VectorInterface{
         return (this.head + r) % this.capacity;
     }
 
-    @Override
     public void resizeVector(int newCapacity){
         Object[] newArray = new Object[newCapacity];
 
@@ -38,7 +37,6 @@ public class VectorCircular implements VectorInterface{
         this.array = newArray;
         this.head = 0;
     }
-    @Override
     public void checkSize(){
         if (this.size == this.capacity) {
             resizeVector(capacity * 2);
