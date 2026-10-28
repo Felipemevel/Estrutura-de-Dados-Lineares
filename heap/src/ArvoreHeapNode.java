@@ -7,7 +7,7 @@ public class ArvoreHeapNode {
     private int size;
 
     private void upHeap(Node n){
-        if (n == this.root || n.getFather() == null) {
+        if (n == this.root) {
             return;
         }
 
@@ -18,6 +18,46 @@ public class ArvoreHeapNode {
             n.getFather().setKey(tempSwap);
 
             upHeap(n.getFather());
+        }
+    }
+    private void downHeap(Node n){
+        if (!(n.hasChild())){
+            return;
+        }
+
+        if (n.getRightChild().getKey() < n.getKey() &&
+        n.getLeftChild().getKey() < n.getKey()){
+            int tempSwap = n.getKey();
+
+            if (n.getRightChild().getKey() < n.getLeftChild().getKey()){
+
+                n.setKey(n.getRightChild().getKey());
+                n.getRightChild().setKey(tempSwap);
+
+                downHeap(n.getRightChild());
+            } else {
+
+                n.setKey(n.getLeftChild().getKey());
+                n.getLeftChild().setKey(tempSwap);
+
+                downHeap(n.getLeftChild());
+            }
+        }
+        if (n.getRightChild().getKey() < n.getKey()){
+            int tempSwap = n.getKey();
+
+            n.setKey(n.getRightChild().getKey());
+            n.getRightChild().setKey(tempSwap);
+
+            downHeap(n.getRightChild());
+        }
+        if (n.getLeftChild().getKey() < n.getKey()){
+            int tempSwap = n.getKey();
+
+            n.setKey(n.getLeftChild().getKey());
+            n.getLeftChild().setKey(tempSwap);
+
+            downHeap(n.getLeftChild());
         }
     }
 
