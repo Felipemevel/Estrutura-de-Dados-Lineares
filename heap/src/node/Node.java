@@ -13,7 +13,7 @@ public class Node {
         this.element = e;
     }
 
-    public boolean hasChild(){
+    public boolean hasChildes(){
         return this.leftChild != null && this.rightChild != null;
     }
     public boolean hasLeftChild(){

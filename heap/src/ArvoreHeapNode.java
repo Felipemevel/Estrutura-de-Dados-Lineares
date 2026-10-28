@@ -21,7 +21,7 @@ public class ArvoreHeapNode {
         }
     }
     private void downHeap(Node n){
-        if (!(n.hasChild())){
+        if (!(n.hasChildes())){
             return;
         }
 
@@ -74,30 +74,54 @@ public class ArvoreHeapNode {
 
     public void insert(int k, Object o){
         Node newNode = new Node(k, o);
+        Node current = this.lastInserction;
+
+        while(true){
+            if (current == this.root){
+                break;
+            }
+            current = current.getFather();
+            if (current == current.getFather().getLeftChild()){
+                current = current.getFather().getRightChild();
+                break;
+            }
+        }
+        while (true){
+            if(!(current.hasChildes())){
+                current.
+            }
+        }
+    }
+
+    public Object removeMin(){
+        Object toRemove = this.root.getElement();
+
+        if (this.lastInserction == this.root){
+            this.root = null;
+            return toRemove;
+        }
+
+        this.root.setKey(this.lastInserction.getKey());
+
         Node current = this.lastInserction.getFather();
 
-        if (!(current.hasRightChild())){
-            current.setRightChild(newNode);
-            newNode.setFather(current);
+        if (current.hasChildes()){
+            lastInserction = current.getLeftChild();
+            current.setRightChild(null);
 
-            this.lastInserction = newNode;
-            this.size++;
+            downHeap(this.root);
 
-            return;
+            return toRemove;
         }
+        lastInserction = current;
+        lastInserction.setLeftChild(null);
 
-        current = this.root;
+        downHeap(this.root);
 
-        while (!(current.hasLeftChild())){
-            current = current.getLeftChild();
-        }
+        return toRemove;
+    }
 
-        current.setLeftChild(newNode);
-        this.size++;
-        this.lastInserction = newNode;
-
-        if (this.lastInserction.getKey() < this.lastInserction.getFather().getKey()){
-            upHeap(this.lastInserction);
-        }
+    public int size(){
+        return this.size;
     }
 }
