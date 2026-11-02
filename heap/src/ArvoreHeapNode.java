@@ -11,54 +11,80 @@ public class ArvoreHeapNode {
             return;
         }
 
-        if (n.getFather().getKey() < n.getKey()){
-            int tempSwap = n.getKey();
+        if (n.getFather().getKey() > n.getKey()){
+            Object tempElement = n.getElement();
+            int tempKey = n.getKey();
 
             n.setKey(n.getFather().getKey());
-            n.getFather().setKey(tempSwap);
+            n.setElement(n.getFather().getElement());
+
+            n.getFather().setKey(tempKey);
+            n.getFather().setElement(tempElement);
 
             upHeap(n.getFather());
         }
     }
     private void downHeap(Node n){
-        if (!(n.hasChildes())){
+        if (!(n.hasLeftChild()) && !(n.hasRightChild())){
             return;
         }
 
-        if (n.getRightChild().getKey() < n.getKey() &&
-        n.getLeftChild().getKey() < n.getKey()){
-            int tempSwap = n.getKey();
+        Node smallerChild;
 
-            if (n.getRightChild().getKey() < n.getLeftChild().getKey()){
+        if (n.hasLeftChild() && n.hasRightChild()){
 
-                n.setKey(n.getRightChild().getKey());
-                n.getRightChild().setKey(tempSwap);
-
-                downHeap(n.getRightChild());
+            if (n.getLeftChild().getKey() < n.getRightChild().getKey()){
+                smallerChild = n.getLeftChild();
             } else {
+                smallerChild = n.getRightChild();
+            }
+        } else {
+            smallerChild = n.getLeftChild();
+        }
 
-                n.setKey(n.getLeftChild().getKey());
-                n.getLeftChild().setKey(tempSwap);
+        if (smallerChild.getKey() < n.getKey()){
+            int tempKey = n.getKey();
+            Object tempElement = n.getElement();
 
-                downHeap(n.getLeftChild());
+            n.setKey(smallerChild.getKey());
+            n.setElement(smallerChild.getElement());
+
+            smallerChild.setKey(tempKey);
+            smallerChild.setElement(tempElement);
+
+            downHeap(smallerChild);
+        }
+    }
+    private Node previousNode(Node n){
+        if (n == this.root){
+            return null;
+        }
+
+        Node current = n;
+        if (current == current.getFather().getRightChild()){
+            current = current.getFather().getLeftChild();
+
+            while (current.hasRightChild()){
+                current = current.getRightChild();
+            }
+            return current;
+        }
+        current = current.getFather();
+
+        while (current != this.root &&
+                current == current.getFather().getLeftChild()){
+            current = current.getFather();
+        }
+
+        if (current != this.root){
+            current = current.getFather().getLeftChild();
+
+            while (current.hasRightChild()){
+                current = current.getRightChild();
             }
         }
-        if (n.getRightChild().getKey() < n.getKey()){
-            int tempSwap = n.getKey();
 
-            n.setKey(n.getRightChild().getKey());
-            n.getRightChild().setKey(tempSwap);
-
-            downHeap(n.getRightChild());
-        }
-        if (n.getLeftChild().getKey() < n.getKey()){
-            int tempSwap = n.getKey();
-
-            n.setKey(n.getLeftChild().getKey());
-            n.getLeftChild().setKey(tempSwap);
-
-            downHeap(n.getLeftChild());
-        }
+        return current;
     }
 
     public ArvoreHeapNode(){
@@ -73,55 +99,104 @@ public class ArvoreHeapNode {
     }
 
     public void insert(int k, Object o){
+        if (this.root == null){
+            this.root = new Node(k, o);
+            this.lastInserction = this.root;
+
+            this.size++;
+            return;
+        }
+
         Node newNode = new Node(k, o);
         Node current = this.lastInserction;
 
-        while(true){
+        while (true){
             if (current == this.root){
                 break;
             }
-            current = current.getFather();
-            if (current == current.getFather().getLeftChild()){
+            if (current == current.getFather().getRightChild()){
+                current = current.getFather();
+            } else if (current == current.getFather().getLeftChild()){
+                if (current.getFather().getRightChild() == null){
+
+                    current.getFather().setRightChild(newNode);
+                    this.lastInserction = current.getFather().getRightChild();
+                    this.lastInserction.setFather(current.getFather());
+
+                    this.size++;
+
+                    upHeap(this.lastInserction);
+                    return;
+                }
                 current = current.getFather().getRightChild();
                 break;
             }
         }
-        while (true){
-            if(!(current.hasChildes())){
-                current.
-            }
+
+        while (current.hasLeftChild()){
+            current = current.getLeftChild();
         }
+
+        current.setLeftChild(newNode);
+        this.lastInserction = current.getLeftChild();
+        this.lastInserction.setFather(current);
+
+        this.size++;
+
+        upHeap(this.lastInserction);
     }
 
     public Object removeMin(){
+        if (this.root == null){
+            throw new IllegalArgumentException(">>> A heap já está vaiza.");
+        }
+
         Object toRemove = this.root.getElement();
 
         if (this.lastInserction == this.root){
             this.root = null;
+            this.lastInserction = null;
+            this.size--;
+
             return toRemove;
         }
 
         this.root.setKey(this.lastInserction.getKey());
+        this.root.setElement(this.lastInserction.getElement());
 
-        Node current = this.lastInserction.getFather();
+        Node oldLast = this.lastInserction;
+        Node previous = previousNode(oldLast);
+        Node current = oldLast.getFather();
 
-        if (current.hasChildes()){
-            lastInserction = current.getLeftChild();
+        if (oldLast == current.getRightChild()){
             current.setRightChild(null);
-
-            downHeap(this.root);
-
-            return toRemove;
+        } else {
+            current.setLeftChild(null);
         }
-        lastInserction = current;
-        lastInserction.setLeftChild(null);
+
+        this.lastInserction = previous;
 
         downHeap(this.root);
+        this.size--;
 
         return toRemove;
     }
 
+
+
+
+    public Object min(){
+        if (this.root == null){
+            throw new IllegalArgumentException(">>> A heap está vazia.");
+        }
+        return this.root.getElement();
+    }
+
     public int size(){
         return this.size;
+    }
+
+    public boolean isEmpty(){
+        return this.root == null;
     }
 }
