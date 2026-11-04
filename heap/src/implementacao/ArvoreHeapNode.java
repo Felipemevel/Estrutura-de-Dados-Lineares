@@ -1,6 +1,9 @@
+package implementacao;
+
+import arvoreHeapInterface.ArvoreHeapInterface;
 import node.Node;
 
-public class ArvoreHeapNode {
+public class ArvoreHeapNode implements ArvoreHeapInterface {
 
     private Node root;
     private Node lastInserction;
@@ -97,7 +100,7 @@ public class ArvoreHeapNode {
         this.lastInserction = this.root;
         this.size = 1;
     }
-
+    @Override
     public void insert(int k, Object o){
         if (this.root == null){
             this.root = new Node(k, o);
@@ -145,7 +148,7 @@ public class ArvoreHeapNode {
 
         upHeap(this.lastInserction);
     }
-
+    @Override
     public Object removeMin(){
         if (this.root == null){
             throw new IllegalArgumentException(">>> A heap já está vaiza.");
@@ -181,22 +184,36 @@ public class ArvoreHeapNode {
 
         return toRemove;
     }
-
-
-
-
+    @Override
     public Object min(){
         if (this.root == null){
             throw new IllegalArgumentException(">>> A heap está vazia.");
         }
         return this.root.getElement();
     }
-
+    @Override
     public int size(){
         return this.size;
     }
-
+    @Override
     public boolean isEmpty(){
         return this.root == null;
+    }
+
+    public void showHeap(Node n) {
+        if (n == null) {
+            return;
+        }
+
+        System.out.println(
+                "Chave: " + n.getKey() +
+                        " | Elemento: " + n.getElement()
+        );
+
+        showHeap(n.getLeftChild());
+        showHeap(n.getRightChild());
+    }
+    public void showHeap() {
+        showHeap(this.root);
     }
 }
