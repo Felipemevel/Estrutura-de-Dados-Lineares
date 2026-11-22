@@ -1,4 +1,4 @@
-public class TabelaHash {
+public class TabelaHash implements DicionarioInterface{
 
     private Item[] array;
     private int capacity;
@@ -39,6 +39,28 @@ public class TabelaHash {
         return h2(h1(k));
     }
     private int d(int k){
-        return this.primeNumber - Math.floorMod(h1(k), this.primeNumber);
+        return this.primeNumber - Math.floorMod(k, this.primeNumber);
     }
+    @Override
+    public Object findElement(int k){
+
+        int i = h(k);
+        int p = 0;
+
+        do {
+
+            Item c = this.array[i];
+            if (c == null){
+                return "NO_SUCH_KEY";
+            } else if(c.getKey() == k){
+                return c.getElement();
+            }
+            i = (i+1) % this.capacity;
+            p++;
+
+        } while (p != this.capacity);
+        return "NO_SUCH_KEY";
+    }
+
+
 }
