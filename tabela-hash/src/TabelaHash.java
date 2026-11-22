@@ -3,11 +3,14 @@ public class TabelaHash implements DicionarioInterface{
     private Item[] array;
     private int capacity;
     private int size;
-    private int primeNumber;
 
+    public TabelaHash(int capacity){
+        this.capacity = capacity;
+        this.size = 0;
+        this.array = new Item[this.capacity];
+    }
     public TabelaHash(){
         this.capacity = 13;
-        this.primeNumber = 11;
         this.size = 0;
         this.array = new Item[this.capacity];
     }
@@ -39,7 +42,14 @@ public class TabelaHash implements DicionarioInterface{
         return h2(h1(k));
     }
     private int d(int k){
-        return this.primeNumber - Math.floorMod(k, this.primeNumber);
+        int q = 3;
+        if (this.capacity <= 3){
+            q = findHighestPrime();
+        }
+        return q - Math.floorMod(k, q);
+    }
+    private Item[] rehash(Item[] array){
+
     }
     @Override
     public Object findElement(int k){
@@ -61,6 +71,8 @@ public class TabelaHash implements DicionarioInterface{
         } while (p != this.capacity);
         return "NO_SUCH_KEY";
     }
+    @Override
+    public void insertItem(int k, Object e){
 
-
+    }
 }
